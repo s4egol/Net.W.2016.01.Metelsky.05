@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 
 namespace Task2
 {
-    public class SortMatrix
+    public static class SortMatrix
     {
         /// <summary>
         /// Sort a matrix of integers
         /// </summary>
-        /// <param name="matrix">Sortable jagged array</param>
-        /// <param name="methodSorting">Sort method of the matrix</param>
-        /// <param name="typeSort">Type of sort</param>
-        public static void Sorting(int[][] matrix, Func<int[], int[], TypeSort> methodSorting, TypeSort typeSort)
+        /// <param name="matrix">Sortable matrix</param>
+        /// <param name="compare"></param>
+        public static void Sorting(int[][] matrix, ICustomComparer compare)
         {
-            if (matrix == null)
+            if (matrix == null || compare == null)
                 throw new ArgumentNullException();
 
             for (int i = 0; i < matrix.Length - 1; i++)
             {
                 for (int j = i + 1; j < matrix.Length; j++)
                 {
-                    if (methodSorting(matrix[i], matrix[j]) == typeSort)
+                    if (compare.CompareArrays(matrix[i], matrix[j]) > 0)
                     {
                         Swap(matrix, i, j);
                     }
