@@ -24,7 +24,7 @@ namespace Task2
                 {
                     if (compare.CompareArrays(matrix[i], matrix[j]) > 0)
                     {
-                        Swap(matrix, i, j);
+                        Swap(ref matrix[i], ref matrix[j]);
                     }
                 }
             }
@@ -33,14 +33,13 @@ namespace Task2
         /// <summary>
         /// Swaps the elements of the array
         /// </summary>
-        /// <param name="matrix">Sortable jagged array</param>
-        /// <param name="numberString1"></param>
-        /// <param name="numberString2"></param>
-        private static void Swap(int[][] matrix, int numberString1, int numberString2)
+        /// <param name="string1">First string of array</param>
+        /// <param name="string2">Second string of array</param>
+		private static void Swap(ref int[] string1, ref int[] string2)
         {
-            int[] temp = matrix[numberString1];
-            matrix[numberString1] = matrix[numberString2];
-            matrix[numberString2] = temp;
+            int[] temp = string1;
+            string1 = string2;
+            string2 = temp;
         }
     }
 }
