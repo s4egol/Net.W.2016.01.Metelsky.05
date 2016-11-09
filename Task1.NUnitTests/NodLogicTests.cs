@@ -17,7 +17,7 @@ namespace Task1.NUnitTests
         [TestCase(150, 100, Result = 50)]
         public int GetNodAlgEvklid_ReturnedValue(int number1, int number2)
         {
-            return Task1.NodLogic.GetNodAlgEvklid(number1, number2);
+            return Task1.GcdLogic.CalculateGcdEuclid(number1, number2);
         }
 
 
@@ -27,14 +27,14 @@ namespace Task1.NUnitTests
         [TestCase(150, 100, Result = 50)]
         public int GetNodAlgEvklidBinary_ReturnedValue(int number1, int number2)
         {
-            return Task1.NodLogic.GetNodAlgEvklidBinary(number1, number2);
+            return Task1.GcdLogic.CalculateGcdEuclidBinary(number1, number2);
         }
 
 
         [TestCase(typeof(ArgumentException), new int[] {})]
         public void GetNod_returnedException(Type exception, params int[] numbers)
         {
-            Assert.Throws(exception, () => Task1.NodLogic.GetNod(Task1.NodLogic.GetNodAlgEvklidBinary, numbers));
+            Assert.Throws(exception, () => Task1.GcdLogic.GetGcd(Task1.GcdLogic.CalculateGcdEuclidBinary, numbers));
         }
 
         [TestCase(1, 2, 3, Result = 1)]
@@ -43,7 +43,7 @@ namespace Task1.NUnitTests
         [TestCase(new int[] {1}, Result = 1)]
         public int GetNod_ReturnedValue(params int[] numbers)
         {
-            return Task1.NodLogic.GetNod(Task1.NodLogic.GetNodAlgEvklid, numbers);
+            return Task1.GcdLogic.GetGcd(Task1.GcdLogic.CalculateGcdEuclid, numbers);
         }
     }
 }
