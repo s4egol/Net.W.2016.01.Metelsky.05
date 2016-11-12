@@ -9,27 +9,53 @@ namespace Task1
 {
     public static class GcdLogic
     {
-        public static int GetGcd(Func<int, int, int> functionFindingGcd, int numberOne, int numberTwo)
-            => GetGcdPattern(functionFindingGcd, numberOne, numberTwo);
+        public static int GetGcdEuclid(int numberOne, int numberTwo)
+            => GetGcdPattern(CalculateGcdEuclid, numberOne, numberTwo);
 
-        public static int GetGcd(Func<int, int, int> functionFindingGcd, int numberOne, int numberTwo, int numberThree)
-            => GetGcdPattern(functionFindingGcd, numberOne, numberTwo, numberThree);
+        public static int GetGcdEuclid(int numberOne, int numberTwo, int numberThree)
+            => GetGcdPattern(CalculateGcdEuclid, numberOne, numberTwo, numberThree);
 
-        public static int GetGcd(Func<int, int, int> functionFindingGcd, params int[] numbers)
-            => GetGcdPattern(functionFindingGcd, numbers);
+        public static int GetGcdEuclid(params int[] numbers)
+            => GetGcdPattern(CalculateGcdEuclid, numbers);
+
+        public static int GetGcdEuclidBinary(int numberOne, int numberTwo)
+            => GetGcdPattern(CalculateGcdEuclidBinary, numberOne, numberTwo);
+
+        public static int GetGcdEuclidBinary(int numberOne, int numberTwo, int numberThree)
+            => GetGcdPattern(CalculateGcdEuclidBinary, numberOne, numberTwo, numberThree);
+
+        public static int GetGcdEuclidBinary(params int[] numbers)
+            => GetGcdPattern(CalculateGcdEuclidBinary, numbers);
+
+        public static int GetGcdEuclidWithTime(out double workedTime, int numberOne, int numberTwo)
+            => GetGcdWithTimePattern(CalculateGcdEuclid, out workedTime, numberOne, numberTwo);
+
+        public static int GetGcdEuclidWithTime(out double workedTime, int numberOne, int numberTwo, int numberThree)
+            => GetGcdWithTimePattern(CalculateGcdEuclid, out workedTime, numberOne, numberTwo, numberThree);
+
+        public static int GetGcdEuclidWithTime(out double workedTime, params int[] numbers)
+            => GetGcdWithTimePattern(CalculateGcdEuclid, out workedTime, numbers);
+
+        public static int GetGcdEuclidBinaryWithTime(out double workedTime, int numberOne, int numberTwo)
+            => GetGcdWithTimePattern(CalculateGcdEuclidBinary, out workedTime, numberOne, numberTwo);
+
+        public static int GetGcdEuclidBinaryWithTime(out double workedTime, int numberOne, int numberTwo, int numberThree)
+            => GetGcdWithTimePattern(CalculateGcdEuclidBinary, out workedTime, numberOne, numberTwo, numberThree);
+
+        public static int GetGcdEuclidBinaryWithTime(out double workedTime, params int[] numbers)
+            => GetGcdWithTimePattern(CalculateGcdEuclidBinary, out workedTime, numbers);
 
 
-        public static int GetGcdWithTimeExecution(Func<int, int, int> functionFindingGcd, out double workedTime, params int[] numbers)
+        private static int GetGcdWithTimePattern(Func<int, int, int> functionFindingGcd, out double workedTime, params int[] numbers)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            int resultGcd = GetGcd(functionFindingGcd, numbers);
+            int resultGcd = GetGcdPattern(functionFindingGcd, numbers);
             watch.Stop();
             workedTime = watch.ElapsedTicks;
             return resultGcd;
         }
 
-
-        public static int CalculateGcdEuclidBinary(int number1, int number2)
+        private static int CalculateGcdEuclidBinary(int number1, int number2)
         {
             number1 = Math.Abs(number1);
             number2 = Math.Abs(number2);
@@ -55,7 +81,7 @@ namespace Task1
             return CalculateGcdEuclidBinary((number2 - number1) >> 1, number1);
         }
 
-        public static int CalculateGcdEuclid(int number1, int number2)
+        private static int CalculateGcdEuclid(int number1, int number2)
         {
             if ((number1 == number2) && (number1 == 0))
                 throw new ArgumentException();
